@@ -1,0 +1,1714 @@
+/* ============================================================
+   ESTILOS GENERALES Y CONFIGURACIÓN ROMÁNTICA
+   ============================================================ */
+:root {
+  --primary-rose: #ff4d6d;
+  --secondary-rose: #ff758f;
+  --blush-light: #fff0f3;
+  --gold-accent: #e5b95f;
+  --gold-glow: rgba(229, 185, 95, 0.6);
+  --deep-romance: #590d22;
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --glass-shadow: 0 15px 35px rgba(89, 13, 34, 0.15), 0 5px 15px rgba(0, 0, 0, 0.08);
+  --border-gold: 2px solid rgba(229, 185, 95, 0.7);
+  --font-script: 'Dancing Script', 'Caveat', cursive;
+  --font-formal: 'Great Vibes', cursive;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Quicksand', 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  color: var(--deep-romance);
+  background-color: #ffe5ec;
+  background-image: url('background.png');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Dynamic backdrop tint overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(255, 240, 243, 0.45) 0%, rgba(255, 204, 216, 0.65) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Canvases for ambient hearts and celebration confetti */
+#ambient-canvas, #confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#ambient-canvas { z-index: 1; }
+#confetti-canvas { z-index: 9999; }
+
+/* ============================================================
+   MUSIC FLOATING BAR
+   ============================================================ */
+.music-pill {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 77, 109, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 77, 109, 0.25);
+  padding: 8px 16px;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.music-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(255, 77, 109, 0.35);
+  border-color: var(--primary-rose);
+}
+
+.disc-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-rose), var(--gold-accent));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(255, 77, 109, 0.3);
+  transition: transform 0.5s linear;
+}
+.disc-icon.playing {
+  animation: spin 3s linear infinite;
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.music-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--deep-romance);
+}
+.music-sub {
+  font-size: 0.72rem;
+  color: var(--secondary-rose);
+  font-family: var(--font-script);
+  font-weight: 600;
+}
+
+.music-toggle-btn {
+  background: linear-gradient(135deg, var(--primary-rose), #c9184a);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.music-toggle-btn:hover {
+  transform: scale(1.05);
+}
+
+/* ============================================================
+   CONTAINER & PAGES LOGIC
+   ============================================================ */
+.page-container {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px 40px 20px;
+}
+
+.page {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(30px) scale(0.97);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: none;
+}
+.page.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.glass-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 36px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--glass-shadow);
+  padding: 45px 35px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================================================
+   ANIMACIONES COMUNES
+   ============================================================ */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 0 35px rgba(255, 77, 109, 0.85);
+  }
+}
+
+@keyframes bounceGentle {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.03); }
+}
+
+.float-anim {
+  animation: floatSoft 3.5s ease-in-out infinite;
+}
+.float-soft {
+  animation: floatSoft 4s ease-in-out infinite;
+}
+.pulse-glow {
+  animation: pulseGlow 2.2s infinite;
+}
+.bounce-gentle {
+  animation: bounceGentle 2.5s infinite;
+}
+
+/* ============================================================
+   PÁGINA 1: BIENVENIDA Y GATITO TIERNO
+   ============================================================ */
+.kitty-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.main-kitty-img {
+  max-width: 290px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 15px 25px rgba(255, 77, 109, 0.3));
+  transition: transform 0.4s ease;
+}
+.main-kitty-img:hover {
+  transform: scale(1.04) rotate(-2deg);
+}
+.sparkle-spark {
+  position: absolute;
+  font-size: 2rem;
+  animation: floatSoft 2s ease-in-out infinite;
+}
+.sparkle-spark.s1 { top: -10px; right: 10px; }
+.sparkle-spark.s2 { bottom: 15px; left: 0; animation-delay: 1s; }
+
+.romantic-heading {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--deep-romance);
+  line-height: 1.35;
+  margin-bottom: 12px;
+}
+.sub-romantic-heading {
+  font-family: var(--font-script);
+  font-size: 2.6rem;
+  color: var(--primary-rose);
+  display: inline-block;
+  font-weight: 700;
+}
+.sweet-caption {
+  font-size: 1.15rem;
+  color: #7a1c38;
+  max-width: 580px;
+  margin: 0 auto 30px auto;
+  line-height: 1.6;
+}
+
+/* Heart-shaped button for Page 1 */
+.heart-shaped-btn {
+  position: relative;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px auto 10px auto;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: drop-shadow(0 10px 20px rgba(255, 77, 109, 0.5));
+  animation: pulseGlowHeart 2s infinite ease-in-out;
+}
+.heart-shaped-btn:hover {
+  transform: scale(1.18);
+  filter: drop-shadow(0 15px 30px rgba(255, 77, 109, 0.75));
+}
+.heart-svg-icon {
+  width: 120px;
+  height: 110px;
+  display: block;
+}
+@keyframes pulseGlowHeart {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 8px 18px rgba(255, 77, 109, 0.5));
+  }
+  50% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 14px 28px rgba(255, 77, 109, 0.8));
+  }
+}
+
+/* ============================================================
+   PÁGINA 2: JARDÍN EN MARCO HERMOSO
+   ============================================================ */
+.ornate-frame-wrapper {
+  margin: 0 auto 25px auto;
+  max-width: 440px;
+}
+.golden-frame {
+  position: relative;
+  padding: 16px;
+  background: linear-gradient(135deg, #ffe082, #d4af37, #fff8e1, #aa771c);
+  border-radius: 28px;
+  box-shadow: 0 20px 45px rgba(170, 119, 28, 0.35), 0 0 0 4px #fff8e1 inset;
+  transition: transform 0.4s ease;
+}
+.golden-frame:hover {
+  transform: scale(1.02);
+}
+.frame-inner-glow {
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.35);
+  line-height: 0;
+}
+.garden-image {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  display: block;
+  border-radius: 18px;
+  transition: transform 0.6s ease;
+}
+.golden-frame:hover .garden-image {
+  transform: scale(1.05);
+}
+.corner-ornament {
+  position: absolute;
+  color: #fff8e1;
+  font-size: 1.6rem;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+  line-height: 1;
+}
+.corner-ornament.top-left { top: 6px; left: 10px; }
+.corner-ornament.top-right { top: 6px; right: 10px; }
+.corner-ornament.bottom-left { bottom: 6px; left: 10px; }
+.corner-ornament.bottom-right { bottom: 6px; right: 10px; }
+
+.poetic-text {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--deep-romance);
+  line-height: 1.7;
+  max-width: 660px;
+  margin: 0 auto 15px auto;
+  font-style: italic;
+}
+.te-amo-mas {
+  font-family: var(--font-script);
+  font-size: 3rem;
+  color: var(--primary-rose);
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-shadow: 0 2px 10px rgba(255, 77, 109, 0.3);
+}
+
+.page-2-btn-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.heart-action-btn {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff4d6d, #d90429);
+  border: none;
+  color: white;
+  font-size: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(255, 77, 109, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.heart-action-btn:hover {
+  transform: scale(1.18);
+  box-shadow: 0 15px 35px rgba(255, 77, 109, 0.7);
+}
+.btn-label-text {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--deep-romance);
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   PÁGINA 3: MARRY1 (TRANSPARENTE)
+   ============================================================ */
+.transparent-illustration {
+  max-width: 330px;
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  filter: drop-shadow(0 15px 30px rgba(255, 77, 109, 0.25));
+}
+.couple-img-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.floating-hearts-layer span {
+  position: absolute;
+  font-size: 1.8rem;
+  animation: floatSoft 3s ease-in-out infinite;
+}
+.f-heart.h1 { top: -10px; left: -20px; animation-delay: 0.3s; }
+.f-heart.h2 { top: 20px; right: -25px; animation-delay: 1.2s; }
+.f-heart.h3 { bottom: 0; left: 10px; animation-delay: 2s; }
+
+.romantic-pill-btn {
+  background: linear-gradient(135deg, var(--primary-rose), #c9184a);
+  color: white;
+  border: none;
+  padding: 16px 42px;
+  font-size: 1.3rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(255, 77, 109, 0.4);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.romantic-pill-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 18px 40px rgba(255, 77, 109, 0.6);
+}
+
+/* ============================================================
+   PÁGINA 4: MARRY2 (LA PROPUESTA)
+   ============================================================ */
+.proposal-photo-wrapper {
+  max-width: 480px;
+  margin: 0 auto 25px auto;
+}
+.proposal-frame {
+  position: relative;
+  border-radius: 26px;
+  padding: 8px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255, 204, 216, 0.6));
+  box-shadow: 0 20px 40px rgba(89, 13, 34, 0.2);
+}
+.proposal-img {
+  width: 100%;
+  border-radius: 20px;
+  display: block;
+}
+
+.proposal-question {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  color: var(--deep-romance);
+  line-height: 1.35;
+  margin-bottom: 15px;
+}
+.proposal-promise {
+  font-size: 1.2rem;
+  color: #7a1c38;
+  max-width: 620px;
+  margin: 0 auto 15px auto;
+  line-height: 1.6;
+}
+.please-say-yes {
+  font-family: var(--font-script);
+  font-size: 2.6rem;
+  color: var(--primary-rose);
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.big-yes-btn {
+  background: linear-gradient(135deg, #ff0054, #ff5400, #ff0054);
+  background-size: 200% 200%;
+  border: none;
+  color: white;
+  padding: 20px 65px;
+  border-radius: 60px;
+  cursor: pointer;
+  box-shadow: 0 15px 45px rgba(255, 0, 84, 0.55), 0 0 0 6px rgba(255, 255, 255, 0.8);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.big-yes-btn:hover {
+  transform: scale(1.12);
+  box-shadow: 0 22px 55px rgba(255, 0, 84, 0.75), 0 0 0 8px rgba(255, 255, 255, 0.95);
+}
+.yes-heart { font-size: 2.4rem; }
+.yes-text {
+  font-family: var(--font-sans);
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.yes-sub {
+  font-size: 0.95rem;
+  font-weight: 600;
+  opacity: 0.95;
+}
+
+/* ============================================================
+   PÁGINA 5: MARRY3, FIRMAS Y CERTIFICADO DE MATRIMONIO
+   ============================================================ */
+.wedding-header-img {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+.transparent-wedding-img {
+  max-width: 290px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 15px 30px rgba(255, 77, 109, 0.25));
+}
+.wedding-bells-badge {
+  background: linear-gradient(135deg, #ffe082, #ffd54f);
+  color: #5d4037;
+  font-weight: 700;
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-top: 8px;
+}
+
+.wedding-title {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  color: var(--deep-romance);
+  margin-bottom: 8px;
+}
+.wedding-subtitle {
+  font-size: 1.15rem;
+  color: #7a1c38;
+  max-width: 620px;
+  margin: 0 auto 25px auto;
+}
+
+/* Signature Slit Station */
+.signature-station-box {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 24px;
+  border: 2px dashed rgba(255, 77, 109, 0.5);
+  box-shadow: 0 10px 25px rgba(89, 13, 34, 0.08);
+  max-width: 640px;
+  margin: 0 auto 30px auto;
+}
+.signature-instruction-pill {
+  font-weight: 700;
+  color: var(--primary-rose);
+  font-size: 1.05rem;
+  margin-bottom: 15px;
+}
+.signature-canvas-container {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1.5px solid #ffccd5;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.04);
+  touch-action: none; /* Prevents scroll while drawing */
+}
+#signature-canvas {
+  width: 100%;
+  height: 180px;
+  display: block;
+  cursor: crosshair;
+}
+.signature-guideline {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  opacity: 0.45;
+}
+.signature-guideline .x-mark { font-size: 1.3rem; font-weight: bold; color: #590d22; }
+.signature-guideline .line {
+  flex-grow: 1;
+  height: 1.5px;
+  background: #590d22;
+}
+.signature-guideline .tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #590d22;
+  white-space: nowrap;
+}
+
+.signature-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 18px;
+}
+.sig-btn {
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+}
+.secondary-btn {
+  background: #ffe5ec;
+  color: #a4133c;
+}
+.secondary-btn:hover {
+  background: #ffb3c1;
+}
+.primary-btn {
+  background: linear-gradient(135deg, var(--primary-rose), #c9184a);
+  color: white;
+  box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+}
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(255, 77, 109, 0.6);
+}
+
+/* ============================================================
+   OFICIAL CERTIFICADO DE MATRIMONIO
+   ============================================================ */
+.marriage-document-container {
+  margin: 30px auto;
+  max-width: 780px;
+  animation: floatSoft 6s ease-in-out infinite;
+}
+.marriage-certificate {
+  background: #fffcf5;
+  background-image: radial-gradient(#f7ebd2 1px, transparent 1px);
+  background-size: 20px 20px;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: 0 25px 60px rgba(89, 13, 34, 0.2), 0 0 0 6px #e5b95f, 0 0 0 12px #fffdfa;
+  border: 2px solid #b8860b;
+}
+.cert-border {
+  border: 2px double #aa771c;
+  border-radius: 16px;
+  padding: 30px 25px;
+  position: relative;
+}
+.cert-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.cert-emblem {
+  font-size: 1.6rem;
+  color: #aa771c;
+}
+.cert-title {
+  font-family: var(--font-formal);
+  font-size: 3.2rem;
+  color: #590d22;
+  margin: 5px 0;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+.cert-subtitle {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: #7a1c38;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.cert-divider {
+  color: #d4af37;
+  font-size: 1.2rem;
+  margin-top: 8px;
+}
+.cert-declaration {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: #4a1525;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.spouses-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+.spouse-item {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255, 240, 243, 0.7);
+  padding: 12px 24px;
+  border-radius: 16px;
+  border: 1px solid #ffd5dc;
+}
+.spouse-role {
+  font-size: 0.85rem;
+  color: #a4133c;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+.spouse-name {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  color: #590d22;
+}
+.heart-connector {
+  font-size: 2rem;
+  animation: pulseGlow 1.8s infinite;
+}
+
+.cert-vows {
+  font-family: var(--font-script);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: #590d22;
+  max-width: 620px;
+  margin: 20px auto;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Signatures display on Certificate */
+.cert-signatures-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  margin-top: 30px;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.cert-sig-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 180px;
+}
+.sig-img-box {
+  height: 80px;
+  width: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stamp-govind-sig, .stamp-summir-sig {
+  max-height: 75px;
+  max-width: 170px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+.sig-line {
+  width: 100%;
+  height: 1.5px;
+  background: #590d22;
+  margin: 5px 0;
+}
+.sig-name {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #590d22;
+}
+.sig-title {
+  font-size: 0.8rem;
+  color: #8c1d40;
+}
+
+/* Gold Wax Seal */
+.cert-gold-seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.seal-circle {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe082 0%, #d4af37 60%, #996515 100%);
+  border: 3px double #ffffff;
+  box-shadow: 0 8px 20px rgba(153, 101, 21, 0.4), inset 0 0 10px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #523608;
+  text-align: center;
+  padding: 5px;
+}
+.seal-rings { font-size: 1.4rem; }
+.seal-text {
+  font-size: 0.6rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+.seal-date {
+  font-size: 0.55rem;
+  font-weight: 700;
+}
+.cert-footer {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 0.95rem;
+  color: #aa771c;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   PÁGINA 6: MARRY4, MEDIDOR DE AMOR, GUIRNALDA Y CARTA
+   ============================================================ */
+.marry4-wrapper {
+  margin-bottom: 10px;
+}
+.marry4-img {
+  max-width: 260px;
+}
+.page6-title {
+  font-family: var(--font-serif);
+  font-size: 2.3rem;
+  color: var(--deep-romance);
+  margin-bottom: 6px;
+}
+.page6-subtitle {
+  font-family: var(--font-script);
+  font-size: 2.5rem;
+  color: var(--primary-rose);
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+/* Love Meter */
+.love-meter-box {
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 28px;
+  padding: 26px 30px;
+  box-shadow: 0 10px 30px rgba(89, 13, 34, 0.08);
+  border: 1.5px solid #ffccd5;
+  max-width: 620px;
+  margin: 0 auto 40px auto;
+}
+.meter-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--deep-romance);
+  margin-bottom: 8px;
+}
+.meter-instructions {
+  font-size: 1rem;
+  color: #7a1c38;
+  margin-bottom: 20px;
+}
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.romantic-slider {
+  flex-grow: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  border-radius: 12px;
+  background: linear-gradient(to right, #ffccd5, #ff4d6d, #c9184a);
+  outline: none;
+  cursor: pointer;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.15);
+}
+.romantic-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 4px solid var(--primary-rose);
+  box-shadow: 0 4px 12px rgba(255, 77, 109, 0.5);
+  cursor: grab;
+  transition: transform 0.15s ease;
+}
+.romantic-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.slider-val-bubble {
+  min-width: 65px;
+  background: var(--primary-rose);
+  color: white;
+  font-weight: 800;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 10px rgba(255, 77, 109, 0.4);
+}
+.meter-caption {
+  font-family: var(--font-script);
+  font-size: 1.85rem;
+  color: #c9184a;
+  font-weight: 700;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+
+/* Fairy Lights & Polaroid Grid */
+.fairy-lights-section {
+  position: relative;
+  margin: 50px auto 40px auto;
+  max-width: 820px;
+}
+.fairy-cord {
+  position: relative;
+  width: 100%;
+  height: 25px;
+  border-bottom: 2px dashed rgba(184, 134, 11, 0.5);
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  margin-bottom: 25px;
+}
+.bulb {
+  width: 12px;
+  height: 18px;
+  background: #fff59d;
+  border-radius: 50% 50% 40% 40%;
+  box-shadow: 0 0 15px 4px #ffee58, 0 0 25px 8px rgba(255, 238, 88, 0.6);
+  animation: glowFlicker 2.5s infinite alternate;
+}
+.bulb:nth-child(even) {
+  animation-delay: 1.2s;
+  background: #ffe082;
+  box-shadow: 0 0 15px 4px #ffd54f, 0 0 25px 8px rgba(255, 213, 79, 0.6);
+}
+@keyframes glowFlicker {
+  0% { opacity: 0.7; transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1.15); }
+}
+
+.polaroid-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 22px;
+  margin-bottom: 20px;
+}
+
+.polaroid-card {
+  position: relative;
+  background: #ffffff;
+  padding: 12px 12px 22px 12px;
+  border-radius: 4px;
+  box-shadow: 0 15px 30px rgba(89, 13, 34, 0.15), 0 2px 6px rgba(0,0,0,0.08);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  width: 175px;
+  cursor: pointer;
+}
+.polaroid-card:hover {
+  transform: translateY(-8px) scale(1.06) rotate(0deg) !important;
+  box-shadow: 0 25px 45px rgba(255, 77, 109, 0.35);
+  z-index: 10;
+}
+.polaroid-card.polaroid-card-wide {
+  width: 290px;
+}
+
+.clothespin {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 24px;
+  background: #d4a373;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+  z-index: 2;
+}
+
+.polaroid-photo {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #f8f9fa;
+  position: relative;
+}
+.polaroid-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* S1 Special 2:1 ratio fitting */
+.polaroid-photo.polaroid-photo-s1 {
+  height: auto;
+  aspect-ratio: 2 / 1;
+  background: #1c1917;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.polaroid-photo.polaroid-photo-s1 img.s1-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.polaroid-caption {
+  font-family: var(--font-script);
+  font-size: 1.3rem;
+  color: var(--deep-romance);
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 700;
+}
+
+.tilt-left { transform: rotate(-3deg); }
+.tilt-right { transform: rotate(3.5deg); }
+.tilt-left-sm { transform: rotate(-2deg); }
+.tilt-right-sm { transform: rotate(2deg); }
+
+.sweet-highlight-text {
+  font-family: var(--font-script);
+  font-size: 2.6rem;
+  color: var(--primary-rose);
+  font-weight: 700;
+  margin: 15px 0 35px 0;
+  text-shadow: 0 2px 8px rgba(255, 77, 109, 0.25);
+}
+
+/* Couple photo y1 section */
+.couple-photo-section {
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.couple-polaroid {
+  width: 250px;
+  padding: 14px 14px 26px 14px;
+}
+.couple-polaroid .polaroid-photo {
+  height: 250px;
+}
+.couple-polaroid .polaroid-caption {
+  font-size: 1.5rem;
+}
+
+/* ============================================================
+   INTERACTIVE SURPRISE: FRASCO MÁGICO DE ABRAZOS
+   ============================================================ */
+.interactive-surprise-section {
+  margin: 40px auto;
+  max-width: 650px;
+}
+.surprise-card {
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 30px;
+  padding: 30px 25px;
+  border: 2px solid #ffd5dc;
+  box-shadow: 0 15px 35px rgba(255, 77, 109, 0.15);
+}
+.jar-badge {
+  background: #ffe5ec;
+  color: #c9184a;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.jar-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--deep-romance);
+  margin: 10px 0 6px 0;
+}
+.jar-subtitle {
+  font-size: 1rem;
+  color: #7a1c38;
+  margin-bottom: 20px;
+}
+
+.magic-jar-visual {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin: 10px 0 20px 0;
+  transition: transform 0.25s ease;
+}
+.magic-jar-visual:hover {
+  transform: scale(1.08);
+}
+.magic-jar-visual:active {
+  transform: scale(0.96);
+}
+.jar-bottle {
+  width: 100px;
+  height: 130px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.7), rgba(255, 204, 216, 0.5));
+  border: 3px solid rgba(255, 77, 109, 0.6);
+  border-radius: 20px 20px 30px 30px;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(255, 77, 109, 0.25), inset 0 0 15px rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.jar-lid {
+  position: absolute;
+  top: -10px;
+  width: 70px;
+  height: 14px;
+  background: #d4a373;
+  border-radius: 6px;
+  border: 2px solid #a26e3c;
+}
+.jar-glow {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(255, 238, 88, 0.8) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulseGlow 2s infinite;
+}
+.jar-stars {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 4px;
+  font-size: 1.2rem;
+  animation: floatSoft 2s ease-in-out infinite;
+}
+.tap-hint {
+  font-size: 0.9rem;
+  color: var(--primary-rose);
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.jar-message-display {
+  background: #fff8f9;
+  border-radius: 20px;
+  padding: 20px 25px;
+  border: 1.5px dashed #ff758f;
+  margin-top: 15px;
+  position: relative;
+  transition: all 0.4s ease;
+}
+.quote-symbol {
+  font-family: var(--font-serif);
+  font-size: 3rem;
+  color: #ffccd5;
+  line-height: 1;
+  position: absolute;
+  top: 5px;
+  left: 15px;
+}
+.jar-message-text {
+  font-family: var(--font-script);
+  font-size: 1.65rem;
+  color: var(--deep-romance);
+  line-height: 1.45;
+  margin: 10px 0;
+  font-weight: 700;
+}
+.hug-counter {
+  font-size: 0.9rem;
+  color: #a4133c;
+  font-weight: 700;
+}
+
+/* ============================================================
+   LETTER TRIGGER
+   ============================================================ */
+.letter-trigger-section {
+  margin: 45px auto;
+}
+.letter-preview-box {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+.letter-top-label {
+  font-family: var(--font-script);
+  font-size: 2.8rem;
+  color: var(--deep-romance);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.letter-img-button {
+  position: relative;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.letter-img-button:hover {
+  transform: scale(1.08);
+}
+.letter-stamp-img {
+  max-width: 250px;
+  width: 100%;
+  filter: drop-shadow(0 15px 30px rgba(89, 13, 34, 0.25));
+}
+.letter-click-pill {
+  background: linear-gradient(135deg, var(--primary-rose), #c9184a);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 15px;
+  box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+}
+
+/* ============================================================
+   SOULMATES GRAND FINALE
+   ============================================================ */
+.grand-finale-box {
+  margin: 60px 0 20px 0;
+  padding: 40px 20px;
+  background: radial-gradient(circle, rgba(255, 240, 243, 0.8) 0%, rgba(255, 255, 255, 0.4) 100%);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+.forever-stars {
+  color: #d4af37;
+  font-size: 1.8rem;
+  letter-spacing: 8px;
+  margin-bottom: 12px;
+}
+.forever-title {
+  font-family: var(--font-serif);
+  font-size: 2.8rem;
+  color: var(--deep-romance);
+  margin-bottom: 8px;
+  font-style: italic;
+}
+.soulmates-title {
+  font-family: var(--font-sans);
+  font-size: 3.8rem;
+  font-weight: 900;
+  letter-spacing: 6px;
+  background: linear-gradient(135deg, #c9184a, #ff0054, #ff758f, #e5b95f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 4px 20px rgba(255, 77, 109, 0.3);
+}
+.soulmates-spanish {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: #7a1c38;
+  font-weight: 700;
+}
+.heart-explosion-symbol {
+  font-size: 2.2rem;
+  margin-top: 15px;
+}
+
+/* ============================================================
+   MODAL DE LA CARTA (PARCHMENT LOOK)
+   ============================================================ */
+.letter-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.letter-modal-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.parchment-container {
+  position: relative;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+  transform: scale(0.9) translateY(20px);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.letter-modal-backdrop.show .parchment-container {
+  transform: scale(1) translateY(0);
+}
+
+.close-letter-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(89, 13, 34, 0.85);
+  color: white;
+  border: 2px solid white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+.close-letter-btn:hover {
+  background: #ff0054;
+  transform: scale(1.1);
+}
+
+.parchment-paper {
+  background: #fffdf7;
+  background-image: 
+    linear-gradient(rgba(240, 220, 190, 0.15) 1px, transparent 1px);
+  background-size: 100% 32px;
+  padding: 45px 35px 35px 35px;
+  border: 3px solid #e3c49a;
+  border-radius: 20px;
+  box-shadow: inset 0 0 35px rgba(212, 163, 115, 0.25);
+  color: #3d0c1e;
+  text-align: left;
+}
+.wax-seal-decor {
+  text-align: center;
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+}
+.letter-greeting {
+  font-family: var(--font-script);
+  font-size: 2.5rem;
+  color: #590d22;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.letter-p {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.85;
+  margin-bottom: 18px;
+  color: #380a18;
+}
+.letter-closing {
+  margin-top: 30px;
+  border-top: 1px dashed #d4af37;
+  padding-top: 20px;
+}
+.closing-bold {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #8c1d40;
+  margin-bottom: 6px;
+}
+.closing-tender, .closing-pet, .closing-care {
+  font-family: var(--font-script);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--primary-rose);
+  line-height: 1.4;
+}
+.closing-sig {
+  font-family: var(--font-formal);
+  font-size: 2.2rem;
+  color: #590d22;
+  margin-top: 15px;
+  text-align: right;
+}
+.letter-seal-footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.85rem;
+  color: #aa771c;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* Helper utilities */
+.hidden {
+  display: none !important;
+}
+
+/* ============================================================
+   MODAL VISOR DE FOTOS EN GRANDE (LIGHTBOX)
+   ============================================================ */
+.photo-lightbox-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 5, 10, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.photo-lightbox-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lightbox-container {
+  position: relative;
+  max-width: 95vw;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes zoomIn {
+  from { transform: scale(0.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.close-lightbox-btn {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--primary-rose);
+  color: white;
+  border: 2px solid white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+  transition: transform 0.2s ease;
+}
+.close-lightbox-btn:hover {
+  transform: scale(1.1);
+  background: #c9184a;
+}
+.lightbox-image-box {
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  max-width: 100%;
+  max-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lightbox-full-img {
+  max-width: 90vw;
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  display: block;
+}
+.lightbox-caption {
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  margin-top: 12px;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* ============================================================
+   RESPONSIVIDAD AVANZADA (MÓVILES, TABLETS Y PANTALLAS PEQUEÑAS)
+   ============================================================ */
+@media (max-width: 768px) {
+  .page-container {
+    padding: 70px 14px 30px 14px;
+  }
+  .glass-card {
+    padding: 28px 16px;
+    border-radius: 24px;
+  }
+  .romantic-heading {
+    font-size: 1.65rem;
+  }
+  .sub-romantic-heading {
+    font-size: 2rem;
+  }
+  .te-amo-mas {
+    font-size: 2.3rem;
+  }
+  .proposal-question {
+    font-size: 1.55rem;
+  }
+  .proposal-promise {
+    font-size: 1.05rem;
+  }
+  .please-say-yes {
+    font-size: 2rem;
+  }
+  .big-yes-btn {
+    padding: 16px 36px;
+    width: 100%;
+    max-width: 320px;
+  }
+  .yes-text {
+    font-size: 2.1rem;
+  }
+  .cert-title {
+    font-size: 2.3rem;
+  }
+  .cert-subtitle {
+    font-size: 0.95rem;
+  }
+  .marriage-certificate {
+    padding: 14px 10px;
+    box-shadow: 0 15px 35px rgba(89, 13, 34, 0.15), 0 0 0 3px #e5b95f;
+  }
+  .cert-border {
+    padding: 18px 12px;
+  }
+  .spouse-name {
+    font-size: 1.3rem;
+  }
+  .cert-vows {
+    font-size: 1.35rem;
+  }
+  .cert-signatures-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .sig-img-box {
+    width: 160px;
+    height: 70px;
+  }
+  .soulmates-title {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+  .forever-title {
+    font-size: 2.1rem;
+  }
+
+  /* Polaroid layout on mobile */
+  .polaroid-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+  }
+  .polaroid-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 10px 18px 10px;
+  }
+  .polaroid-card.polaroid-card-wide {
+    grid-column: 1 / -1; /* s1 takes full width across the top */
+    width: 100%;
+    max-width: 100%;
+  }
+  .polaroid-photo {
+    height: 140px;
+  }
+  .polaroid-photo.polaroid-photo-s1 {
+    height: auto !important;
+    aspect-ratio: 2 / 1;
+    max-height: 175px;
+  }
+  .polaroid-photo.polaroid-photo-s1 img.s1-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Music Player compact on mobile */
+  .music-pill {
+    top: 10px;
+    right: 10px;
+    padding: 6px 12px;
+    gap: 8px;
+  }
+  .music-title {
+    font-size: 0.75rem;
+  }
+  .music-sub {
+    display: none;
+  }
+
+  /* Signature canvas station on mobile */
+  .signature-station-box {
+    padding: 16px 12px;
+  }
+  #signature-canvas {
+    height: 150px;
+  }
+  .signature-actions {
+    gap: 10px;
+  }
+  .sig-btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+
+  /* Love Meter on mobile */
+  .love-meter-box {
+    padding: 20px 16px;
+  }
+  .slider-val-bubble {
+    min-width: 55px;
+    font-size: 1rem;
+    padding: 5px 10px;
+  }
+
+  /* Parchment modal on mobile */
+  .parchment-container {
+    max-height: 86vh;
+    border-radius: 16px;
+  }
+  .parchment-paper {
+    padding: 30px 18px 25px 18px;
+  }
+  .letter-greeting {
+    font-size: 2rem;
+  }
+  .letter-p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+  .closing-tender, .closing-pet, .closing-care {
+    font-size: 1.6rem;
+  }
+  .close-letter-btn {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 65px 10px 25px 10px;
+  }
+  .glass-card {
+    padding: 24px 12px;
+    border-radius: 20px;
+  }
+  .romantic-heading {
+    font-size: 1.45rem;
+  }
+  .sub-romantic-heading {
+    font-size: 1.75rem;
+  }
+  .golden-frame {
+    padding: 10px;
+    border-radius: 20px;
+  }
+  .corner-ornament {
+    font-size: 1.2rem;
+  }
+  .te-amo-mas {
+    font-size: 2.1rem;
+  }
+  .soulmates-title {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+  .soulmates-spanish {
+    font-size: 1.7rem;
+  }
+}

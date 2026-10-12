@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Para Mi Niña Hermosa ❤️ | Govind & Summir</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient floating particles canvas -->
+  <canvas id="ambient-canvas"></canvas>
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Floating Audio Player Bar -->
+  <div id="music-player" class="music-pill">
+    <div class="disc-icon" id="disc-btn">
+      <span class="disc-symbol">🎵</span>
+    </div>
+    <div class="music-info">
+      <span class="music-title">Can't Help Falling In Love</span>
+      <span class="music-sub">Nuestra Canción Especial 💕</span>
+    </div>
+    <button class="music-toggle-btn" id="music-btn" title="Reproducir / Pausar">▶ Reproducir</button>
+  </div>
+
+  <!-- Audio element -->
+  <audio id="wedding-song" preload="auto">
+    <source src="wedding-song.mp3" type="audio/mpeg">
+    <source src="Can%27t%20Help%20Falling%20In%20Love%20Wedding%20Entrance%20Version%20by%20James%20Wong.mp3" type="audio/mpeg">
+    Tu navegador no soporta audio.
+  </audio>
+
+  <!-- Main Container -->
+  <main class="page-container">
+
+    <!-- ==================== PÁGINA 1 ==================== -->
+    <section id="page-1" class="page active">
+      <div class="glass-card page-1-card">
+        <div class="kitty-wrapper float-anim">
+          <img src="kitty1.png" alt="Gatito tierno con amor" class="main-kitty-img">
+          <div class="sparkle-spark s1">✨</div>
+          <div class="sparkle-spark s2">💖</div>
+        </div>
+
+        <h1 class="romantic-heading">
+          Amor, hice algo para ti...<br>
+          <span class="sub-romantic-heading">espero que te encante ❤️</span>
+        </h1>
+
+        <p class="sweet-caption">Preparé este rinconcito con todo mi corazón para sacarte una sonrisa.</p>
+
+        <div class="btn-group">
+          <button id="btn-p1-see" class="heart-shaped-btn" title="Ver lo que preparé">
+            <svg class="heart-svg-icon" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ff4d6d"/>
+                  <stop offset="100%" stop-color="#c9184a"/>
+                </linearGradient>
+              </defs>
+              <path d="M 50,85 C 50,85 10,55 10,30 C 10,12 25,5 38,12 C 45,17 50,26 50,26 C 50,26 55,17 62,12 C 75,5 90,12 90,30 C 90,55 50,85 50,85 Z" fill="url(#heartGrad)"/>
+              <text x="50" y="46" text-anchor="middle" dominant-baseline="middle" fill="#ffffff" font-family="'Dancing Script', cursive" font-size="23" font-weight="bold">Ver</text>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PÁGINA 2 ==================== -->
+    <section id="page-2" class="page hidden">
+      <div class="glass-card page-2-card">
+        <!-- Retro / Antique Golden Frame for Garden -->
+        <div class="ornate-frame-wrapper">
+          <div class="golden-frame">
+            <div class="frame-inner-glow">
+              <img src="garden.jpg" alt="Un jardín hermoso como tú" class="garden-image">
+            </div>
+            <div class="corner-ornament top-left">❦</div>
+            <div class="corner-ornament top-right">❦</div>
+            <div class="corner-ornament bottom-left">❦</div>
+            <div class="corner-ornament bottom-right">❦</div>
+          </div>
+        </div>
+
+        <div class="text-content">
+          <p class="poetic-text">
+            Así es exactamente como te veo, por cierto... y siempre te veré así, porque eres verdaderamente especial para mí, mi amor. Y siempre lo serás, mi cielo, mi dulce amor.
+          </p>
+          <h2 class="te-amo-mas">Te amo más ❤️</h2>
+        </div>
+
+        <div class="btn-group page-2-btn-box">
+          <button id="btn-p2-heart" class="heart-action-btn pulse-glow" title="Haz clic aquí">
+            <span class="heart-icon">♥</span>
+          </button>
+          <span class="btn-label-text">Haz clic aquí</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PÁGINA 3 ==================== -->
+    <section id="page-3" class="page hidden">
+      <div class="glass-card page-3-card">
+        <div class="couple-img-wrapper float-soft">
+          <img src="marry1.png" alt="Algo especial para nosotros" class="transparent-illustration">
+          <div class="floating-hearts-layer">
+            <span class="f-heart h1">🌸</span>
+            <span class="f-heart h2">✨</span>
+            <span class="f-heart h3">💕</span>
+          </div>
+        </div>
+
+        <h1 class="romantic-heading text-shadow">
+          Amor, tengo algo muy especial para nosotros... 💕
+        </h1>
+
+        <p class="sweet-caption">
+          Cierra los ojos un segundito, respira hondo y acompáñame al siguiente paso.
+        </p>
+
+        <div class="btn-group">
+          <button id="btn-p3-lets-see" class="romantic-pill-btn pulse-anim">
+            <span>Vamos a ver ✨</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PÁGINA 4 ==================== -->
+    <section id="page-4" class="page hidden">
+      <div class="glass-card page-4-card">
+        <div class="proposal-photo-wrapper">
+          <div class="proposal-frame">
+            <img src="marry2.jpg" alt="Propuesta de matrimonio" class="proposal-img">
+            <div class="starlight-overlay"></div>
+          </div>
+        </div>
+
+        <div class="proposal-text-box">
+          <h1 class="proposal-question">
+            Mi amor, ¿te casarías conmigo y me dejarías cuidarte por el resto de mi vida?
+          </h1>
+          <p class="proposal-promise">
+            Haré que cada instante valga la pena... prometo llenarte de amor, paz y sonrisas.
+          </p>
+          <p class="please-say-yes">
+            Por favor, di que sí... 🥺💍
+          </p>
+        </div>
+
+        <div class="proposal-buttons">
+          <button id="btn-p4-yes" class="big-yes-btn bounce-gentle">
+            <span class="yes-heart">💖</span>
+            <span class="yes-text">¡SÍ!</span>
+            <span class="yes-sub">Acepto casarme contigo</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PÁGINA 5 ==================== -->
+    <section id="page-5" class="page hidden">
+      <div class="glass-card page-5-card">
+        <div class="wedding-header-img">
+          <img src="marry3.png" alt="Nuestra boda soñada" class="transparent-wedding-img float-soft">
+          <div class="wedding-bells-badge">🔔 ¡Dijiste que sí! 💒</div>
+        </div>
+
+        <h1 class="wedding-title">Acta de Nuestro Amor Eterno</h1>
+        <p class="wedding-subtitle">
+          Antes de que el matrimonio quede sellado oficialmente en las estrellas, necesitamos tu firma, mi amor.
+        </p>
+
+        <!-- Signature Canvas Slit Box -->
+        <div class="signature-station-box">
+          <div class="signature-instruction-pill">
+            ✍️ Dibuja tu firma con tu dedito (en el móvil) o con el cursor (en la laptop)
+          </div>
+
+          <div class="signature-canvas-container">
+            <canvas id="signature-canvas" width="600" height="200"></canvas>
+            <div class="signature-guideline">
+              <span class="x-mark">✕</span>
+              <span class="line"></span>
+              <span class="tag">Firma de Summir Albino Espinoza</span>
+            </div>
+          </div>
+
+          <div class="signature-actions">
+            <button id="btn-clear-sig" class="sig-btn secondary-btn" type="button">
+              🧹 Limpiar
+            </button>
+            <button id="btn-done-sig" class="sig-btn primary-btn pulse-glow" type="button">
+              ✨ Listo
+            </button>
+          </div>
+        </div>
+
+        <!-- Official Marriage Certificate Modal / Embedded Document -->
+        <div id="marriage-doc-wrapper" class="marriage-document-container hidden">
+          <div class="marriage-certificate">
+            <div class="cert-border">
+              <div class="cert-header">
+                <span class="cert-emblem">💍 ✦ 💒 ✦ 💍</span>
+                <h2 class="cert-title">Certificado de Matrimonio</h2>
+                <h3 class="cert-subtitle">Unión Simbólica de Dos Almas Gemelas</h3>
+                <div class="cert-divider">❦ ❦ ❦</div>
+              </div>
+
+              <div class="cert-body">
+                <p class="cert-declaration">
+                  Hacemos constar ante el universo y ante nuestros corazones que en esta fecha sagrada se unen en sagrado y eterno compromiso de amor incondicional:
+                </p>
+
+                <div class="spouses-showcase">
+                  <div class="spouse-item">
+                    <span class="spouse-role">El Esposo</span>
+                    <strong class="spouse-name">Govind Mehra</strong>
+                  </div>
+                  <div class="heart-connector">💖</div>
+                  <div class="spouse-item">
+                    <span class="spouse-role">La Esposa</span>
+                    <strong class="spouse-name">Summir Albino Espinoza</strong>
+                  </div>
+                </div>
+
+                <p class="cert-vows">
+                  "Prometemos cuidarnos mutuamente, ser el refugio del otro en los días grises, reír juntos en las horas felices y amarnos con ternura infinita por toda la eternidad."
+                </p>
+
+                <!-- Signatures Row -->
+                <div class="cert-signatures-row">
+                  <div class="cert-sig-block">
+                    <div class="sig-img-box">
+                      <img src="sign1.png" alt="Firma de Govind Mehra" class="stamp-govind-sig">
+                    </div>
+                    <div class="sig-line"></div>
+                    <span class="sig-name">Govind Mehra</span>
+                    <span class="sig-title">El Esposo</span>
+                  </div>
+
+                  <div class="cert-gold-seal">
+                    <div class="seal-circle">
+                      <span class="seal-rings">💍</span>
+                      <span class="seal-text">AMOR ETERNO</span>
+                      <span class="seal-date">PARA SIEMPRE</span>
+                    </div>
+                  </div>
+
+                  <div class="cert-sig-block">
+                    <div class="sig-img-box">
+                      <img id="stamp-summir-sig" src="" alt="Firma de Summir Albino Espinoza" class="stamp-summir-sig">
+                    </div>
+                    <div class="sig-line"></div>
+                    <span class="sig-name">Summir Albino Espinoza</span>
+                    <span class="sig-title">La Esposa</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cert-footer">
+                <span>✦ Sellado con amor verdadero e incondicional ✦</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next button below -->
+        <div id="p5-next-box" class="btn-group hidden">
+          <button id="btn-p5-next" class="romantic-pill-btn bounce-gentle">
+            <span>Continuar a Nuestros Recuerdos 💖</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PÁGINA 6 ==================== -->
+    <section id="page-6" class="page hidden">
+      <div class="glass-card page-6-card">
+        
+        <!-- Top Marry4 header -->
+        <div class="marry4-wrapper float-soft">
+          <img src="marry4.png" alt="Recién casados" class="transparent-illustration marry4-img">
+        </div>
+
+        <div class="page6-header-text">
+          <h1 class="page6-title">Ahora que ya estamos casados...</h1>
+          <h2 class="page6-subtitle">Algunos recuerdos hermosos ✨</h2>
+        </div>
+
+        <!-- Love Meter Section -->
+        <div class="love-meter-box">
+          <div class="meter-header">
+            <span class="meter-icon">📈❤️</span>
+            <span class="meter-title">Medidor de Amor</span>
+          </div>
+          <p class="meter-instructions">
+            Desliza la barra para indicar cuánto amor sientes:
+          </p>
+
+          <div class="slider-wrapper">
+            <input type="range" id="love-slider" min="0" max="100" value="100" class="romantic-slider">
+            <div class="slider-val-bubble" id="love-percent-display">100%</div>
+          </div>
+
+          <div class="meter-caption" id="meter-caption">
+            Jeje, ya sé que me amas muchísimo 🥰
+          </div>
+        </div>
+
+        <!-- Fairy Lights and Retro Frame Pictures -->
+        <div class="fairy-lights-section">
+          <!-- Fairy light cord with glowing bulbs -->
+          <div class="fairy-cord">
+            <span class="bulb b1"></span>
+            <span class="bulb b2"></span>
+            <span class="bulb b3"></span>
+            <span class="bulb b4"></span>
+            <span class="bulb b5"></span>
+            <span class="bulb b6"></span>
+            <span class="bulb b7"></span>
+            <span class="bulb b8"></span>
+          </div>
+
+          <!-- Polaroid Grid for s1, s2, s3, s4 -->
+          <div class="polaroid-grid">
+            <div class="polaroid-card polaroid-card-wide tilt-left" title="Toca para ver en grande">
+              <div class="clothespin"></div>
+              <div class="polaroid-photo polaroid-photo-s1">
+                <img src="s1.jpeg" alt="Recuerdo de mi hermosa wawita 1" class="s1-img">
+              </div>
+              <div class="polaroid-caption">Tu luz ✨</div>
+            </div>
+
+            <div class="polaroid-card tilt-right">
+              <div class="clothespin"></div>
+              <div class="polaroid-photo">
+                <img src="s2.jpeg" alt="Recuerdo de mi hermosa wawita 2">
+              </div>
+              <div class="polaroid-caption">Tu sonrisa 🌸</div>
+            </div>
+
+            <div class="polaroid-card tilt-left-sm">
+              <div class="clothespin"></div>
+              <div class="polaroid-photo">
+                <img src="s3.jpeg" alt="Recuerdo de mi hermosa wawita 3">
+              </div>
+              <div class="polaroid-caption">Tan preciosa 💖</div>
+            </div>
+
+            <div class="polaroid-card tilt-right-sm">
+              <div class="clothespin"></div>
+              <div class="polaroid-photo">
+                <img src="s4.jpeg" alt="Recuerdo de mi hermosa wawita 4">
+              </div>
+              <div class="polaroid-caption">Mi alegría 🌟</div>
+            </div>
+          </div>
+
+          <p class="sweet-highlight-text">Mi hermosa linda wawita</p>
+        </div>
+
+        <!-- Couple Photo Section (y1) -->
+        <div class="couple-photo-section">
+          <div class="polaroid-card couple-polaroid">
+            <div class="clothespin"></div>
+            <div class="polaroid-photo">
+              <img src="y1.jpeg" alt="Tú y yo juntos">
+            </div>
+            <div class="polaroid-caption">Siempre nosotros dos ❤️</div>
+          </div>
+          <p class="sweet-highlight-text">Tú y yo, por cierto jeje 💕</p>
+        </div>
+
+        <!-- INTERACTIVE SURPRISE: Magic Jar of Infinite Hugs & Reasons -->
+        <div class="interactive-surprise-section">
+          <div class="surprise-card">
+            <div class="jar-header">
+              <span class="jar-badge">🎁 Sorpresa Especial Para Ti</span>
+              <h3 class="jar-title">El Frasco Mágico de Abrazos y Razones Infinitas</h3>
+              <p class="jar-subtitle">
+                Toca el frasco cada vez que me extrañes, estés triste o necesites un abrazo cálido:
+              </p>
+            </div>
+
+            <div class="magic-jar-visual" id="magic-jar-btn">
+              <div class="jar-bottle">
+                <div class="jar-lid"></div>
+                <div class="jar-glow"></div>
+                <div class="jar-stars">
+                  <span>✨</span><span>💖</span><span>🌸</span><span>⭐</span><span>💌</span>
+                </div>
+              </div>
+              <div class="tap-hint">Toca aquí para recibir amor 👆</div>
+            </div>
+
+            <!-- Dynamic Hug Note Popup / Display -->
+            <div class="jar-message-display" id="jar-message-box">
+              <div class="quote-symbol">“</div>
+              <p id="jar-text" class="jar-message-text">
+                Eres la razón por la que mi corazón late tan contento. ¡Toma un abrazo bien fuerte! 🤗
+              </p>
+              <div class="hug-counter" id="hug-counter">Abrazos enviados: 1 ❤️</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Letter Section -->
+        <div class="letter-trigger-section">
+          <div class="letter-preview-box">
+            <div class="letter-top-label">Una carta para ti 💌</div>
+            <div class="letter-img-button" id="open-letter-btn">
+              <img src="letter1.png" alt="Sobre de carta de amor" class="letter-stamp-img float-soft">
+              <div class="letter-click-pill pulse-glow">Haz clic aquí para abrirla</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Big Closing Finale -->
+        <div class="grand-finale-box">
+          <div class="forever-stars">✦ ✦ ✦</div>
+          <h1 class="forever-title">Voy a amarte por siempre</h1>
+          <h2 class="soulmates-title">SOULMATES</h2>
+          <p class="soulmates-spanish">Almas Gemelas</p>
+          <div class="heart-explosion-symbol">💖 💍 💖</div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== MODAL DE LA CARTA COMPLETA ==================== -->
+  <div id="letter-modal" class="letter-modal-backdrop hidden">
+    <div class="parchment-container">
+      <button id="close-letter-btn" class="close-letter-btn" title="Cerrar carta">✕</button>
+      
+      <div class="parchment-paper">
+        <div class="wax-seal-decor">💌</div>
+
+        <div class="letter-body-content">
+          <p class="letter-greeting">Mi niña hermosa,</p>
+
+          <p class="letter-p">
+            No sé cómo empezar esta carta porque hay tantas cosas que quiero decirte y tantas cosas que a veces no sé cómo explicar. Pero hoy quiero escribirte algo que espero que puedas recordar incluso en tus días más difíciles.
+          </p>
+
+          <p class="letter-p">
+            Quiero que sepas que eres una persona realmente especial para mí, incluso en los días en que tú misma no puedas verlo. No tienes que hacer cosas extraordinarias para recibir cariño, siempre te amaré. Siempre estoy aquí, tal vez a solo una llamada de distancia, pero siempre presente. Mi wawita, podemos compartir tanto nuestras alegrías como nuestras tristezas juntos, y siempre estaré a tu lado cuando me necesites, porque de verdad me importas y te amo con todo mi ser.
+          </p>
+
+          <p class="letter-p">
+            Te amaré en cada vida, en cada forma humana y en cualquier otra forma. Ojalá pudiera darte un abrazo cálido y un beso enorme porque mi pequeña es realmente fuerte y la amo muchísimo. Mi amor, cuídate mucho porque quiero casarme contigo :3 bueno, ¡de hecho ya estamos casados ahora!
+          </p>
+
+          <p class="letter-p">
+            A veces solo desearía que la distancia fuera más corta, para poder sentarme a tu lado, escucharte hablar sobre tu día y abrazarte cuando las palabras no fueran suficientes. Te amaré más allá de la eternidad.
+          </p>
+
+          <div class="letter-closing">
+            <p class="closing-bold">Te amo 3000 (mucho más que eso y más que a mi propia vida).</p>
+            <p class="closing-tender">Ti amo mutooo ❤️</p>
+            <p class="closing-pet">Mi linda wawita 🥰</p>
+            <p class="closing-care">Cuídate muchooo 💕</p>
+            <p class="closing-sig">— Tuyo por siempre, Govind</p>
+          </div>
+        </div>
+
+        <div class="letter-seal-footer">
+          <span>Promesa eterna de amor ✦ Govind & Summir</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL VISOR DE FOTOS EN GRANDE ==================== -->
+  <div id="photo-lightbox" class="photo-lightbox-backdrop hidden">
+    <div class="lightbox-container">
+      <button id="close-lightbox-btn" class="close-lightbox-btn" title="Cerrar">✕</button>
+      <div class="lightbox-image-box">
+        <img id="lightbox-img" src="" alt="Foto en grande" class="lightbox-full-img">
+      </div>
+      <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
